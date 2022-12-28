@@ -57,11 +57,39 @@ const personalInformatin = {
   fatherNameEnglish : form.fatherNameEnglish.value,
   motherNameBangla : form.motherNameBangla.value,
   motherNameEnglish : form.motherNameEnglish.value,
-}
-console.log(personalInformatin)  
+  spouseNameBangla : form.spouseNameBangla.value,
+  spouseNameEnglish : form.spouseNameEnglish.value,
+  dateOfBirth: form.dateOfBirth.value,
+  gender: form.gender.value,
+  religion: form.religion.value,
+  bloodGroup:form.bloodGroup.value,
+  height: form.height.value,
+  weight: form.weight.value,
+  phone: form.phone.value,
+  nid: form.nid.value,
+  email: form.email.value,
 }
 
 
+const presentAddress = {
+  village: form.village.value,
+  postOffice: form.postOffice.value,
+  union: form.union.value,
+  upazila: form.upazila.value,
+  district: form.district.value,
+}
+// console.log(presentAddress)  
+
+const applicantPhoto ={
+  applicantPhoto : form.applicantPhoto.files,
+}
+const applicantSignature ={
+  applicantSignature : form.applicantSignature.FileList,
+}
+console.log(applicantPhoto, applicantSignature.FileList)
+}
+
+fetch()
 
 
 
@@ -157,7 +185,6 @@ console.log(personalInformatin)
               />
             </div>
           </div>
-
           <div className="flex gap-10">
             <div className="w-full">
               <div className="mb-2 block">
@@ -229,7 +256,7 @@ console.log(personalInformatin)
               </div>
               <Select name="bloodGroup" id="bloodGroup" >
                 {bloodGroups.map((bloodGroup, i) => (
-                  <option key={i}>{bloodGroup}</option>
+                  <option key={i} value={bloodGroup}>{bloodGroup}</option>
                 ))}
               </Select>
             </div>
@@ -237,7 +264,7 @@ console.log(personalInformatin)
               <div className="mb-2 block">
                 <Label htmlFor="height" value="Height (Feet)" />
               </div>
-              <TextInput id="height" type="text" sizing="sm" />
+              <TextInput id="height" name="height" type="text" sizing="sm" />
             </div>
             <div>
               <div className="mb-2 block">
@@ -269,7 +296,7 @@ console.log(personalInformatin)
                 id="idno"
                 placeholder="National Id no / Date of Birth no"
                 sizing="sm"
-                name="idNo"
+                name="nid"
                         />
             </div>
             <div>
@@ -280,7 +307,7 @@ console.log(personalInformatin)
                 id="email4"
                 type="email"
                 placeholder="name@email.com"
-                
+                name="email"
                 icon={HiMail}
               />
             </div>
@@ -491,6 +518,7 @@ console.log(personalInformatin)
             </div>
             <FileInput
               id="file"
+              name="applicantSignature"
               // helperText="A profile picture is useful to confirm your are logged into your account"
             />
           </div>
@@ -500,6 +528,7 @@ console.log(personalInformatin)
             </div>
             <FileInput
               id="file"
+              name="applicantPhoto"
               // helperText="A profile picture is useful to confirm your are logged into your account"
             />
           </div>

@@ -43,10 +43,32 @@ const ApplyForm = () => {
     "Diploma (Nursing/Midwifery)",
   ];
   const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+
+
+
+const handleForm = event =>{
+event.preventDefault();
+const form = event.target;
+// console.log(form)
+const personalInformatin = {
+  applicantNameBangla : form.applicantNameBangla.value,
+  applicantNameEnglish : form.applicantNameEnglish.value,
+  fatherNameBangla : form.fatherNameBangla.value,
+  fatherNameEnglish : form.fatherNameEnglish.value,
+  motherNameBangla : form.motherNameBangla.value,
+  motherNameEnglish : form.motherNameEnglish.value,
+}
+console.log(personalInformatin)  
+}
+
+
+
+
+
   return (
     <div className="flex flex-col gap-4 w-11/12 mx-auto">
-      <form>
-        <Header></Header>
+      <form onSubmit={handleForm}>
+        
         <fieldset className="rounded border border-solid border-gray-300 p-3">
           <legend className="font-bold text-xl">Personal Information</legend>
           <div className="flex gap-10">
@@ -182,7 +204,7 @@ const ApplyForm = () => {
               <div className="mb-2 block">
                 <Label htmlFor="gender" value="Gender" />
               </div>
-              <Select id="gender" name="gender" required={true}>
+              <Select id="gender" name="gender" >
                 <option>Male</option>
                 <option>Female</option>
                 <option>Others</option>
@@ -192,7 +214,7 @@ const ApplyForm = () => {
               <div className="mb-2 block">
                 <Label htmlFor="religion" value="Religion" />
               </div>
-              <Select id="religion" name="religion" required={true}>
+              <Select id="religion" name="religion" >
                 {/* Islam Hinduism Christans Buddhists Others */}
                 <option>Islam</option>
                 <option>Hinduism</option>
@@ -205,7 +227,7 @@ const ApplyForm = () => {
               <div className="mb-2 block">
                 <Label htmlFor="bloodGroup" value="Blood Group" />
               </div>
-              <Select name="bloodGroup" id="bloodGroup" required={true}>
+              <Select name="bloodGroup" id="bloodGroup" >
                 {bloodGroups.map((bloodGroup, i) => (
                   <option key={i}>{bloodGroup}</option>
                 ))}
@@ -228,8 +250,7 @@ const ApplyForm = () => {
                 <Label htmlFor="phone" value="Mobile Number" />
               </div>
               <TextInput
-                required
-                id="phone"
+                          id="phone"
                 name="phone"
                 icon={HiPhone}
                 defaultValue={"+8801"}
@@ -249,8 +270,7 @@ const ApplyForm = () => {
                 placeholder="National Id no / Date of Birth no"
                 sizing="sm"
                 name="idNo"
-                required
-              />
+                        />
             </div>
             <div>
               <div className="mb-2 block">
@@ -260,7 +280,7 @@ const ApplyForm = () => {
                 id="email4"
                 type="email"
                 placeholder="name@email.com"
-                required={true}
+                
                 icon={HiMail}
               />
             </div>
@@ -329,7 +349,7 @@ const ApplyForm = () => {
                 <div className="mb-2 block">
                   <Label htmlFor="countries" value="Examination" />
                 </div>
-                <Select id="countries" required={true}>
+                <Select id="countries" >
                   <option>S.S.C</option>
                   <option>Dakhil</option>
                   <option>O Level/Cabridge</option>
@@ -340,7 +360,7 @@ const ApplyForm = () => {
                 <div className="mb-2 block">
                   <Label htmlFor="board" value="Board" />
                 </div>
-                <Select name="board" id="board" required={true}>
+                <Select name="board" id="board" >
                   {boards.map((board) => (
                     <option>{board}</option>
                   ))}
@@ -368,7 +388,7 @@ const ApplyForm = () => {
                 <div className="mb-2 block">
                   <Label htmlFor="board" value="Group" />
                 </div>
-                <Select name="Group" id="Group" required={true}>
+                <Select name="Group" id="Group" >
                   {groups.map((group) => (
                     <option>{group}</option>
                   ))}
@@ -384,7 +404,7 @@ const ApplyForm = () => {
                 <Select
                   name="hscLevelExamination"
                   id="examination"
-                  required={true}
+                  
                 >
                   {hscLevels.map((hscLevel, i) => (
                     <option key={i} value={hscLevel}>
@@ -397,7 +417,7 @@ const ApplyForm = () => {
                 <div className="mb-2 block">
                   <Label htmlFor="board" value="Board" />
                 </div>
-                <Select name="board" id="board" required={true}>
+                <Select name="board" id="board" >
                   {boards.map((board) => (
                     <option>{board}</option>
                   ))}
@@ -425,7 +445,7 @@ const ApplyForm = () => {
                 <div className="mb-2 block">
                   <Label htmlFor="board" value="Group" />
                 </div>
-                <Select name="Group" id="Group" required={true}>
+                <Select name="Group" id="Group" >
                   {groups.map((group) => (
                     <option>{group}</option>
                   ))}

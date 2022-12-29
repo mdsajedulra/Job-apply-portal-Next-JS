@@ -44,59 +44,112 @@ const ApplyForm = () => {
   ];
   const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
+  const handleForm = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    // console.log(form)
+    const personalInformatin = {
+      applicantNameBangla: form.applicantNameBangla.value,
+      applicantNameEnglish: form.applicantNameEnglish.value,
+      fatherNameBangla: form.fatherNameBangla.value,
+      fatherNameEnglish: form.fatherNameEnglish.value,
+      motherNameBangla: form.motherNameBangla.value,
+      motherNameEnglish: form.motherNameEnglish.value,
+      spouseNameBangla: form.spouseNameBangla.value,
+      spouseNameEnglish: form.spouseNameEnglish.value,
+      dateOfBirth: form.dateOfBirth.value,
+      gender: form.gender.value,
+      religion: form.religion.value,
+      bloodGroup: form.bloodGroup.value,
+      height: form.height.value,
+      weight: form.weight.value,
+      phone: form.phone.value,
+      nid: form.nid.value,
+      email: form.email.value,
+    };
 
+    const presentAddress = {
+      village: form.village.value,
+      postOffice: form.postOffice.value,
+      union: form.union.value,
+      upazila: form.upazila.value,
+      district: form.district.value,
+    };
 
-const handleForm = event =>{
-event.preventDefault();
-const form = event.target;
-// console.log(form)
-const personalInformatin = {
-  applicantNameBangla : form.applicantNameBangla.value,
-  applicantNameEnglish : form.applicantNameEnglish.value,
-  fatherNameBangla : form.fatherNameBangla.value,
-  fatherNameEnglish : form.fatherNameEnglish.value,
-  motherNameBangla : form.motherNameBangla.value,
-  motherNameEnglish : form.motherNameEnglish.value,
-  spouseNameBangla : form.spouseNameBangla.value,
-  spouseNameEnglish : form.spouseNameEnglish.value,
-  dateOfBirth: form.dateOfBirth.value,
-  gender: form.gender.value,
-  religion: form.religion.value,
-  bloodGroup:form.bloodGroup.value,
-  height: form.height.value,
-  weight: form.weight.value,
-  phone: form.phone.value,
-  nid: form.nid.value,
-  email: form.email.value,
-}
+    const educationQualification = {
+      sscLevel: {
+        examination: form.sscLevel.value,
+        board: form.sscBoard.value,
+        roll: form.sscRoll.value,
+        reg: form.sscReg.value,
+        result: form.sscResult.value,
+        group: form.sscGroup.value,
+      },
+      hscLevel: {
+        examination: form.hscLevelExamination.value,
+        board: form.hscBoard.value,
+        roll: form.hscRoll.value,
+        reg: form.hscReg.value,
+        result: form.hscResult.value,
+        group: form.hscGroup.value,
+      },
+    };
 
+    const skills = {
+      skills: form.skills.value,
+    };
 
-const presentAddress = {
-  village: form.village.value,
-  postOffice: form.postOffice.value,
-  union: form.union.value,
-  upazila: form.upazila.value,
-  district: form.district.value,
-}
-// console.log(presentAddress)  
+    // const applicantPhoto = form.applicantPhoto.files[0];
+    // console.log(applicantPhoto);
+    // const formData = new FormData();
+    // formData.append("image", applicantPhoto);
 
-const applicantPhoto ={
-  applicantPhoto : form.applicantPhoto.files,
-}
-const applicantSignature ={
-  applicantSignature : form.applicantSignature.FileList,
-}
-console.log(applicantPhoto, applicantSignature.FileList)
-}
+    //   var url =
+    //     "https://api.imgbb.com/1/upload?key=b3d74dd6c8e3730b521c7da1d7ed64f2";
+    //   fetch(url, {
+    //     method: "POST",
+    //     body: formData,
+    //   })
+    //     .then((res) => res.json())
+    //     .then((img) => console.log(img));
+    // };
 
-fetch()
+    const applicantSignature = form.applicantSignature.files[0];
+    const formData = new FormData();
+    formData.append("image", applicantSignature);
+    const url =
+      "https://api.imgbb.com/1/upload?key=b3d74dd6c8e3730b521c7da1d7ed64f2";
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgdata) => console.log(imgdata));
 
-
+    const allDetails = {
+      phone: form.phone.value,
+      nid: form.nid.value,
+      email: form.email.value,
+      personalInformatin,
+      presentAddress,
+      educationQualification,
+      skills,
+    };
+    // console.log(allDetails);
+    fetch("http://localhost:5000/applications", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(allDetails),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
 
   return (
     <div className="flex flex-col gap-4 w-11/12 mx-auto">
       <form onSubmit={handleForm}>
-        
         <fieldset className="rounded border border-solid border-gray-300 p-3">
           <legend className="font-bold text-xl">Personal Information</legend>
           <div className="flex gap-10">
@@ -231,7 +284,7 @@ fetch()
               <div className="mb-2 block">
                 <Label htmlFor="gender" value="Gender" />
               </div>
-              <Select id="gender" name="gender" >
+              <Select id="gender" name="gender">
                 <option>Male</option>
                 <option>Female</option>
                 <option>Others</option>
@@ -241,7 +294,7 @@ fetch()
               <div className="mb-2 block">
                 <Label htmlFor="religion" value="Religion" />
               </div>
-              <Select id="religion" name="religion" >
+              <Select id="religion" name="religion">
                 {/* Islam Hinduism Christans Buddhists Others */}
                 <option>Islam</option>
                 <option>Hinduism</option>
@@ -254,9 +307,11 @@ fetch()
               <div className="mb-2 block">
                 <Label htmlFor="bloodGroup" value="Blood Group" />
               </div>
-              <Select name="bloodGroup" id="bloodGroup" >
+              <Select name="bloodGroup" id="bloodGroup">
                 {bloodGroups.map((bloodGroup, i) => (
-                  <option key={i} value={bloodGroup}>{bloodGroup}</option>
+                  <option key={i} value={bloodGroup}>
+                    {bloodGroup}
+                  </option>
                 ))}
               </Select>
             </div>
@@ -277,7 +332,7 @@ fetch()
                 <Label htmlFor="phone" value="Mobile Number" />
               </div>
               <TextInput
-                          id="phone"
+                id="phone"
                 name="phone"
                 icon={HiPhone}
                 defaultValue={"+8801"}
@@ -297,7 +352,7 @@ fetch()
                 placeholder="National Id no / Date of Birth no"
                 sizing="sm"
                 name="nid"
-                        />
+              />
             </div>
             <div>
               <div className="mb-2 block">
@@ -374,9 +429,9 @@ fetch()
               <h1 className="font-bold text-xl">SSC or Equivalent Level</h1>
               <div id="select">
                 <div className="mb-2 block">
-                  <Label htmlFor="countries" value="Examination" />
+                  <Label htmlFor="sscLevel" value="Examination" />
                 </div>
-                <Select id="countries" >
+                <Select id="sscLevel" name="sscLevel">
                   <option>S.S.C</option>
                   <option>Dakhil</option>
                   <option>O Level/Cabridge</option>
@@ -387,7 +442,7 @@ fetch()
                 <div className="mb-2 block">
                   <Label htmlFor="board" value="Board" />
                 </div>
-                <Select name="board" id="board" >
+                <Select name="sscBoard" id="board">
                   {boards.map((board) => (
                     <option>{board}</option>
                   ))}
@@ -397,25 +452,30 @@ fetch()
                 <div className="mb-2 block">
                   <Label htmlFor="small" value="Roll" />
                 </div>
-                <TextInput name="roll" id="small" type="text" sizing="sm" />
+                <TextInput name="sscRoll" id="small" type="text" sizing="sm" />
               </div>
               <div>
                 <div className="mb-2 block">
                   <Label htmlFor="small" value="Reg No" />
                 </div>
-                <TextInput name="reg" id="small" type="text" sizing="sm" />
+                <TextInput name="sscReg" id="small" type="text" sizing="sm" />
               </div>
               <div>
                 <div className="mb-2 block">
                   <Label htmlFor="small" value="Result" />
                 </div>
-                <TextInput name="Result" id="small" type="text" sizing="sm" />
+                <TextInput
+                  name="sscResult"
+                  id="small"
+                  type="text"
+                  sizing="sm"
+                />
               </div>
               <div id="select">
                 <div className="mb-2 block">
                   <Label htmlFor="board" value="Group" />
                 </div>
-                <Select name="Group" id="Group" >
+                <Select name="sscGroup" id="Group">
                   {groups.map((group) => (
                     <option>{group}</option>
                   ))}
@@ -428,11 +488,7 @@ fetch()
                 <div className="mb-2 block">
                   <Label htmlFor="examination" value="Examination" />
                 </div>
-                <Select
-                  name="hscLevelExamination"
-                  id="examination"
-                  
-                >
+                <Select name="hscLevelExamination" id="examination">
                   {hscLevels.map((hscLevel, i) => (
                     <option key={i} value={hscLevel}>
                       {hscLevel}
@@ -444,7 +500,7 @@ fetch()
                 <div className="mb-2 block">
                   <Label htmlFor="board" value="Board" />
                 </div>
-                <Select name="board" id="board" >
+                <Select name="hscBoard" id="board">
                   {boards.map((board) => (
                     <option>{board}</option>
                   ))}
@@ -454,63 +510,44 @@ fetch()
                 <div className="mb-2 block">
                   <Label htmlFor="small" value="Roll" />
                 </div>
-                <TextInput name="roll" id="small" type="text" sizing="sm" />
+                <TextInput name="hscRoll" id="small" type="text" sizing="sm" />
               </div>
               <div>
                 <div className="mb-2 block">
                   <Label htmlFor="small" value="Reg No" />
                 </div>
-                <TextInput name="reg" id="small" type="text" sizing="sm" />
+                <TextInput name="hscReg" id="small" type="text" sizing="sm" />
               </div>
               <div>
                 <div className="mb-2 block">
                   <Label htmlFor="small" value="Result" />
                 </div>
-                <TextInput name="Result" id="small" type="text" sizing="sm" />
+                <TextInput
+                  name="hscResult"
+                  id="small"
+                  type="text"
+                  sizing="sm"
+                />
               </div>
               <div id="select">
                 <div className="mb-2 block">
-                  <Label htmlFor="board" value="Group" />
+                  <Label htmlFor="hscBoard" value="Group" />
                 </div>
-                <Select name="Group" id="Group" >
+                <Select name="hscGroup" id="Group">
                   {groups.map((group) => (
                     <option>{group}</option>
                   ))}
                 </Select>
               </div>
             </div>
-
-            {/* Graduation Level */}
-
-            <div className="w-1/2 border-2 p-5 rounded-xl">
-              <h1 className="font-bold text-xl">Graduation Level</h1>
-              <div id="select">
-                <div className="mb-2 block">
-                  <Label
-                    htmlFor="graduationLevelExamination"
-                    value="Examination"
-                  />
-                </div>
-                <TextInput
-                  name="graduationLevelExamination"
-                  id="graduationLevelExamination"
-                  type="text"
-                  sizing="sm"
-                />
-              </div>
-
-              <div>
-                <div className="mb-2 block">
-                  <Label htmlFor="graducationLevelResult" value="Result" />
-                </div>
-                <TextInput name="Result" id="small" type="text" sizing="sm" />
-              </div>
-            </div>
           </div>
         </fieldset>
 
         <h1 className="font-bold text-xl">Skills/Extra Curricular</h1>
-        <Textarea placeholder="Explain about your self whay you good fit for this position"></Textarea>
+        <Textarea
+          name="skills"
+          placeholder="Explain about your self whay you good fit for this position"
+        ></Textarea>
         <div className="flex gap-10">
           <div id="fileUpload" className="w-full">
             <div className="mb-2 block">

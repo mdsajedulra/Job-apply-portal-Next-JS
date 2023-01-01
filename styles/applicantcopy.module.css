@@ -1,0 +1,44 @@
+.pdf-page {
+  width: 8.3in;
+  height: 11.7in;
+  padding: 30px;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+.table {
+  background-color: black;
+  font-family: arial, sans-serif;
+  /* border-collapse: collapse; */
+  width: 100%;
+  border: 1px solid black;
+  padding: 50px;
+  /* display: inline-block; */
+
+  /* font-size: 14pt; */
+}
+.th {
+  background-color: #dddddd;
+}
+.td,
+.th {
+  border: 1px solid white;
+  text-align: left;
+  /* padding: 8px; */
+  /* width: 50px; */
+  padding: 2px;
+  /* height: 40px; */
+  /* display: inline; */
+  /* word-break: break-word; */
+}
+.td {
+  background-color: #e3e3e3;
+}
+.tr {
+  /* display: inline-block; */
+  background-color: #cccccc;
+}
+
+/* tr:nth-child(even) {
+    background-color: #dddddd;
+  } */

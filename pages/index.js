@@ -11,7 +11,7 @@ import { toast } from "react-hot-toast";
 import { HiMail } from "react-icons/hi";
 import { HiPhone } from "react-icons/hi";
 import Footer from "../Component/Header/Footer";
-import Header from "../Component/Header/Header";
+import Header from "./Component/Header";
 
 const ApplyForm = () => {
   const [signature, setSignature] = useState("");
@@ -132,36 +132,37 @@ const ApplyForm = () => {
       body: formData,
     })
       .then((res) => res.json())
-      .then((imgdata) => setSignature(imgdata.data.image.url));
-
-    const applicantPhoto = form.applicantPhoto.files[0];
-    // const formData = new FormData();
-    formData.append("image", applicantPhoto);
-    fetch(
-      "https://api.imgbb.com/1/upload?key=b3d74dd6c8e3730b521c7da1d7ed64f2",
-      {
-        method: "POST",
-        body: formData,
-      }
-    )
-      .then((res) => res.json())
       .then((imgdata) => {
-        if (imgdata.success) {
-          setPhoto(imgdata.data.image.url);
-          fetch("http://localhost:5000/applications", {
+        setSignature(imgdata.data.image.url);
+        const applicantPhoto = form.applicantPhoto.files[0];
+        // const formData = new FormData();
+        formData.append("image", applicantPhoto);
+        fetch(
+          "https://api.imgbb.com/1/upload?key=b3d74dd6c8e3730b521c7da1d7ed64f2",
+          {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(allDetails),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.acknowledged) {
-                toast.success("Your application has been submitted!");
-              }
-            });
-        }
+            body: formData,
+          }
+        )
+          .then((res) => res.json())
+          .then((imgdata) => {
+            if (imgdata.success) {
+              setPhoto(imgdata.data.image.url);
+              fetch("http://localhost:5000/applications", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(allDetails),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  if (data.acknowledged) {
+                    toast.success("Your application has been submitted!");
+                  }
+                });
+            }
+          });
       });
   };
 
@@ -622,7 +623,7 @@ const ApplyForm = () => {
               <input
                 value="Apply"
                 type="submit"
-                className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                className=" text-white bg-[#019545] hover:bg-[#019546ee] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 Apply
                 Button
               />
@@ -632,7 +633,7 @@ const ApplyForm = () => {
 
                 <button
                   type="button"
-                  class="text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                  class="text-white bg-[#98f1c1]  dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                   disabled
                 >
                   Apply

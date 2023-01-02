@@ -52,24 +52,19 @@ const Admin = () => {
           <tbody>
             {data.map((application) => (
               <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th
+                <td
                   scope="row"
                   class="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  <img
-                    class="w-10 h-10 rounded-full"
-                    src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
-                    alt="Jese image"
-                  />
                   <div class="pl-3">
                     <div class="text-base font-semibold">
                       {application.personalInformatin.applicantNameEnglish}
                     </div>
                     <div class="font-normal text-gray-500">
-                      {application.mainEmail}
+                      {application?.mainEmail}
                     </div>
                   </div>
-                </th>
+                </td>
                 <td class="py-4 px-6">Credit Officer</td>
                 <td class="py-4 px-6">
                   <div class="flex items-center">

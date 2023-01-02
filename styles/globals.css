@@ -131,7 +131,8 @@ table {
   /* font-size: 14pt; */
 }
 th {
-  background-color: #dddddd;
+  background-color: #019546cb;
+  color: white;
 }
 td,
 th {

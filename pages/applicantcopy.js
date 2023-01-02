@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { useEffect, useState } from "react";
+import logo from "/public/assets/icon.png";
 import Pdf from "react-to-pdf";
 const ref = React.createRef();
 const options = {
@@ -95,13 +96,13 @@ const ApplicantCopyDownload = () => {
               </Pdf>
               <div className="pdf-page" ref={ref}>
                 <div className="text-center flex flex-col items-center">
-                  {/* <Image
-                className="w-24"
-                width="50"
-                height="50"
-                src=""
-                alt=""
-              /> */}
+                  <Image
+                    className="w-24"
+                    width="50"
+                    height="50"
+                    src={logo}
+                    alt=""
+                  />
                   <h1 className="text-center text-2xl font-semibold">
                     Organisation for Social Advancement & Cultural
                     Activities(OSACA)
@@ -119,35 +120,35 @@ const ApplicantCopyDownload = () => {
                     </thead>
 
                     <tr>
-                      <th className="th">Applicant Name (Bangla):</th>
+                      <td className="th">Applicant Name (Bangla):</td>
                       <td>{personalInformatin?.applicantNameBangla}</td>
                     </tr>
                     <tr>
-                      <th className="th">Applicant Name (English):</th>
+                      <td className="th">Applicant Name (English):</td>
                       <td c>{personalInformatin?.applicantNameEnglish}</td>
                     </tr>
                     <tr>
-                      <th className="th">Father's Name (Bangla):</th>
+                      <td className="th">Father's Name (Bangla):</td>
                       <td>{personalInformatin?.fatherNameBangla}</td>
                     </tr>
                     <tr>
-                      <th className="th">Father's Name (English):</th>
+                      <td className="th">Father's Name (English):</td>
                       <td>{personalInformatin?.fatherNameEnglish}</td>
                     </tr>
                     <tr>
-                      <th className="th">Mother's Name (Bangla):</th>
+                      <td className="th">Mother's Name (Bangla):</td>
                       <td>{personalInformatin?.motherNameBangla}</td>
                     </tr>
                     <tr>
-                      <th className="th">Mother's Name (English)</th>
+                      <td className="th">Mother's Name (English)</td>
                       <td>{personalInformatin?.motherNameEnglish}</td>
                     </tr>
                     <tr>
-                      <th className="th">Spouse Name (Bangla):</th>
+                      <td className="th">Spouse Name (Bangla):</td>
                       <td>{personalInformatin?.spouseNameBangla}</td>
                     </tr>
                     <tr>
-                      <th className="th">Spouse Name (English):</th>
+                      <td className="th">Spouse Name (English):</td>
                       <td>{personalInformatin?.spouseNameEnglish}</td>
                     </tr>
                   </div>
